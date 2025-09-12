@@ -42,6 +42,7 @@ maven-releases admin admin123
   <username>admin</username>
   <password>admin123</password>
 </server>
+
 Login to Jenkins servr
 ls -l /var/lib/jenkins/.M2/
 mkdir -p /var/lib/jenkins/.m2
@@ -106,5 +107,6 @@ stages {
 
 vim /etc/sudoers
 jenkins ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx, /bin/rm, /bin/cp or sudo chown -R jenkins:jenkins /var/www/html
+
 
 

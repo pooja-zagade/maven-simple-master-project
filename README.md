@@ -47,12 +47,27 @@ Login to Jenkins servr
 ls -l /var/lib/jenkins/.M2/
 mkdir -p /var/lib/jenkins/.m2
 vim /var/lib/jenkins/.m2/settings.xml
-maven-releases admin admin123
-<server>
-  <id>maven-snapshots</id>
-  <username>admin</username>
-  <password>admin123</password>
-</server>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+<servers>
+    <server>
+      <id>maven-releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+
+    <server>
+      <id>maven-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+  </servers>
+</settings>
+
 Edit POM.xml for server IP
 ex. 52.66.206.151
 
@@ -66,7 +81,7 @@ environment {
 stages {
     stage('Checkout Code') {
         steps {
-            git branch: 'master', url: 'https://github.com/ygminds73/maven-simple-master.git'
+            git branch: 'main', url: 'https://github.com/pooja-zagade/maven-simple-master-project.git'
         }
     }
 
@@ -106,7 +121,18 @@ stages {
 }
 
 vim /etc/sudoers
-jenkins ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx, /bin/rm, /bin/cp or sudo chown -R jenkins:jenkins /var/www/html
+jenkins ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx, /bin/rm, /bin/cp or 
+sudo chown -R jenkins:jenkins /var/www/html
+.m2 run command:
+sudo mkdir -p /var/lib/jenkins/.m2/repository
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.m2
+
+root directory run:
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+
+
+
 
 
 
